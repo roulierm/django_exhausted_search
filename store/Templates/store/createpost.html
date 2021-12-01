@@ -1,0 +1,31 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+{%if user.is_authenticated%}
+    <center>
+        <h1><strong>Sell your car</strong></h1>
+        <br/><br/>
+        {% if submitted %}
+            Your car has been posted sucessfully!
+        {% else %}
+
+        <form action="" method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{form.as_p}}
+
+            <input type="submit" value="submit" class="btn btn-secondary">
+
+        </form>
+        {% endif %}
+    {% else %}
+
+    <h1>Sorry, you can't access this page.</h1>
+    <h3>Register or Login here</h3>
+    <a class="btn btn-outline-success" href="{% url 'login' %}">Login</a>
+    <a class="btn btn-outline-success" href="{% url 'register_user' %}">Sign Up</a>
+{% endif %}
+    </center>
+{% endblock content%}

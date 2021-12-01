@@ -1,0 +1,63 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class = 'row'>
+  <div class = 'col'>
+    <div class = 'card card-body'>
+        <form method="get">
+          {{myFilter.form}}
+        <button class="btn btn-primary" type = "submit">Search</button>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    {% for car in cars %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{car.imageURL|default:'/images/transparentLogo.png'}}">
+        <div class="box-element product">
+            <h6><strong>{{car.Year}} {{car.Make}} {{car.Model}}</strong></h6>
+            <hr>
+            <a class="btn btn-outline-success" href="{% url 'post_detail' car.pk %}">View</a>
+            <h4 style="display: inline-block; float: right"><strong>${{car.Price|floatformat:2}}</strong></h4>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<nav aria-label="Page navigation">   <ul class="pagination">
+    {% if cars.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">begin</span>
+      </a>
+    </li>   {% endif %}
+    
+    {% for n in cars.paginator.page_range %}
+      {% if cars.number == n %}
+        <li class="page-item active">
+          <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+        </li>
+      {% elif n > cars.number|add:'-3' and n < cars.number|add:'3' %}
+        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+      {% endif %}
+    {% endfor %}
+    
+    {% if cars.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ cars_list.paginator.num_pages }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">end</span>
+        </a>
+      </li>
+      {% endif %}   </ul> </nav>
+
+<br/>
+    
+{% endblock content %}

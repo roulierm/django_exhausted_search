@@ -1,0 +1,53 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300&display=swap');
+
+    body {
+        background-color: white;
+    }
+
+    img{
+        width: 60%;
+        padding-right: 15px;
+
+        float: left;
+    }
+
+    h5{
+        padding-bottom: 25px;
+        font-size: 20px;
+        font-family: 'Outfit', sans-serif;
+        color: black;
+    }
+
+    #toptext{
+        padding-top: 150px;
+    }
+
+    #center{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+</style>
+{%if user.is_authenticated%}
+    <img id = "center" src="{{car.imageURL|default:'/images/transparentLogo.png'}}">
+    <h5 id="toptext">{{car.Year}} {{car.Make}} {{car.Model}}</h5>
+    <br/>
+    <h5>Mileage: {{car.Mileage}} miles</h5> 
+    <br/> 
+    <h5>Price: ${{car.Price}}</h5> 
+    <br/>
+    <h5>Seller email: {{car.email}}</h5>
+{% else %}
+    <h1>Sorry, you don't have authorization to see this page.</h1>
+
+{% endif %}
+{% endblock content %}
