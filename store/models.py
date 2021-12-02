@@ -19,7 +19,7 @@ class Userpost(models.Model):
     Price = models.DecimalField(max_digits=15, decimal_places=2)
     email = models.EmailField()
     date_published = models.DateField(default = timezone.now)
-    image = models.ImageField(null = True, blank = True, upload_to = r"C:\Users\gabri\Desktop\test\ecommerce\static\images")
+    image = models.ImageField(null = True, blank = True, upload_to = 'pics')
     zipCode = models.CharField(max_length=5)
     
 
@@ -45,3 +45,15 @@ class Dealer(models.Model):
 
     def __str__(self):
         return self.dealersName
+
+
+class Listing(models.Model):
+    carID = models.IntegerField(("Column1"))
+    price = models.IntegerField(("Column2"))
+    msrp = models.IntegerField(("Column3"))
+    mileage = models.IntegerField(("Column4"))
+    new = models.BooleanField(("Column5"),default=True)
+    model = models.CharField(("Column6"), max_length=20 )
+    make = models.CharField(("Column7"), max_length=20)
+    year = models.IntegerField(("Column8"))
+    dealerID = models.IntegerField(("Column9"))

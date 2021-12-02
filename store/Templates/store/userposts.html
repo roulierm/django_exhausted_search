@@ -17,32 +17,57 @@
 <link rel="stylesheet" type="text/css" href=" {% static 'styles/responsive.css' %} ">
 </head>
 <body>
+  <div class="super_container">
+	
+    <!-- Header -->
+  
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+              <div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+                <div class="logo"><a href="main.html">Exhaustive Search</a></div>
+                <nav class="main_nav">
+                  <ul class="d-flex flex-row align-items-start justify-content-start">
+                    <li class="active"><a href="main.html">Home</a></li>
+                    
+                    <li><a href="{% url 'posts' %}">Vehicles For Sale</a></li>
+                    {% if user.is_authenticated %}
+                    <li>Hello, {{user.first_name}}</li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'createpost' %}">Sell Your Vehicle</a></li>
+                    {% else %}
+                    <li><a href="{% url 'register_user' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">Login</a> </li>
+                    {% endif %}<li><a href="contact.html">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </header>
 
-<div class = 'row'>
-  <div class = 'col'>
-    <div class = 'card card-body'>
-        <form method="get">
-          {{myFilter.form}}
-        <button class="btn btn-primary" type = "submit">Search</button>
-        </form>
-    </div>
-  </div>
-</div>
 
 <div class="row">
+  <div class="col"><
     {% for car in cars %}
-    <div class="col-lg-4">
+    
         <img class="thumbnail" src="{{car.imageURL|default:'/images/transparentLogo.png'}}">
         <div class="box-element product">
             <h6><strong>{{car.Year}} {{car.Make}} {{car.Model}}</strong></h6>
             <hr>
             <a class="btn btn-outline-success" href="{% url 'post_detail' car.pk %}">View</a>
             <h4 style="display: inline-block; float: right"><strong>${{car.Price|floatformat:2}}</strong></h4>
-
+      {% endfor %}
         </div>
     </div>
-    {% endfor %}
+    
 </div>
+  </div>
 
 
 <nav aria-label="Page navigation">   <ul class="pagination">
@@ -74,5 +99,14 @@
       {% endif %}   </ul> </nav>
 
 <br/>
-    
+<script src=" {% static 'js/jquery-3.2.1.min.js' %} "></script>
+<script src=" {% static 'styles/bootstrap4/popper.js' %} "></script>
+<script src=" {% static 'styles/bootstrap4/bootstrap.min.js' %} "></script>
+<script src=" {% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %} "></script>
+<script src=" {% static 'plugins/Isotope/isotope.pkgd.min.js' %} "></script>
+<script src=" {% static 'plugins/scrollTo/jquery.scrollTo.min.js' %} "></script>
+<script src=" {% static 'plugins/easing/easing.js' %} "></script>
+<script src=" {% static 'plugins/parallax-js-master/parallax.min.js' %} "></script>
+<script src=" {% static 'js/custom.js' %} "></script>
 </body>
+</html>

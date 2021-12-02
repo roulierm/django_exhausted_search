@@ -39,7 +39,7 @@ def posts(request):
     except EmptyPage:
         cars = p.page(p.num_pages)
 
-    context = {'cars':cars, "myFilter":myFilter}
+    context = {'cars':cars}
     return render(request, 'store/userposts.html', context)
 
 def createPost(request):
