@@ -1,82 +1,282 @@
-<!DOCTYPE html>
 {% load static %}
-<html>
+{% static "images" as baseUrl  %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Exhaustive Search</title>
-
-    <style>
-      body{
-        background-color: #e6e4e4;
-      }
-    </style>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+<title>Exhaustive Search</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href=" {% static 'styles/bootstrap4/bootstrap.min.css' %} ">
+<link href=" {% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %} " rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href=" {% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %} ">
+<link rel="stylesheet" type="text/css" href=" {% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %} ">
+<link rel="stylesheet" type="text/css" href=" {% static 'plugins/OwlCarousel2-2.2.1/animate.css' %} ">
+<link rel="stylesheet" type="text/css" href=" {% static 'styles/main_styles.css' %} ">
+<link rel="stylesheet" type="text/css" href=" {% static 'styles/responsive.css' %} ">
 </head>
-
 <body>
-    <div class = "container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{% url 'home' %}">Exhausted Search</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'store' %}"> Dealerships <span class="sr-only">(current)</span></a>
-                </li>
 
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'posts' %}"> Posts <span class="sr-only">(current)</span></a>
-                </li>
+<div class="super_container">
+	
+	<!-- Header -->
 
-                {% if user.is_authenticated%}
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'createpost' %}"> Sell your vehicle <span class="sr-only">(current)</span></a>
-                </li>
-                {% endif %}
-              </ul>
-              {% if user.is_authenticated %}
-              <div class="form-inline my-2 my-lg-0">
-                <a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>               
-              </div>
-              {% else %}
-              <div class="form-inline my-2 my-lg-0">
-                       <a href="{% url 'login' %}" class="btn btn-warning">Login</a>               
-                </div>
-                <div class="form-inline my-2 my-lg-0">
-                  <a href="{% url 'register_user' %}" class="btn btn-warning">Register</a>               
-           </div>
-              {% endif %}
-            </div>
-        </nav>
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="main.html">Exhaustive Search</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li class="active"><a href="main.html">Home</a></li>
+									
+									<li><a href="{% url 'posts' %}">Vehicles For Sale</a></li>
+									{% if user.is_authenticated %}
+									<li>Hello, {{user.first_name}}</li>
+									<li><a href="{% url 'logout' %}">Logout</a></li>
+									<li><a href="{% url 'createpost' %}">Sell Your Vehicle</a></li>
+									{% else %}
+									<li><a href="{% url 'register_user' %}">Register</a></li>
+									<li><a href="{% url 'login' %}">Login</a> </li>
+									{% endif %}<li><a href="contact.html">Contact</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</header>
 
-        {% if messages %}
-          {% for message in messages %}
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{message}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-          {% endfor %}
-        {% endif %}
+	<!-- Menu -->
 
-        {% block content %}
+	<div class="menu">
+		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+			<div class="menu_logo"><a href=" {% static 'main.html' %} ">Exhaustive Search</a></div>
+			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+		</div>
+		<div class="menu_content">
+			<ul>
+				<li><a href=" {% static 'main.html' %} ">Home</a></li>
+				<li><a href=" {% static 'contact.html' %} ">Contact</a></li>
+				<li><a href="accounts/login">Login</a></li>
 
-        {% endblock content%}
-    </div>
+				
+			</ul>
+		</div>
+		<div class="menu_social">
+			<div class="menu_phone ml-auto">Call us: 00-56 445 678 33</div>
+			<ul class="d-flex flex-row align-items-start justify-content-start">
+				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<!-- Home -->
+
+	<div class="home">
+		
+		<!-- Home Slider -->
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+				
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url( {% static 'images/usedcars.jpg' %} )"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_content">
+										<div class="home_title"><h2>The End to your search</h2></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url( {% static 'images/home_slider.jpg' %} )"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_content">
+										<div class="home_title"><h2>Let us take you away</h2></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url( {% static 'images/home_slider.jpg' %} )"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_content">
+										<div class="home_title"><h2>Let us take you away</h2></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="home_page_nav">
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- Search -->
+
+	<div class="home_search">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_search_container">
+						<div class="home_search_title">Search for your Vehicle</div>
+						<div class="home_search_content">
+							<form action="#" class="home_search_form" id="home_search_form">
+								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
+									<input type="text" class="search_input search_input_1" placeholder="Make" required="required">
+									<input type="text" class="search_input search_input_2" placeholder="Model" required="required">
+									<input type="text" class="search_input search_input_3" placeholder="Year" required="required">
+									<input type="text" class="search_input search_input_3" placeholder="Mileage" required="required">
+									<input type="text" class="search_input search_input_4" placeholder="Price" required="required">
+									<button class="home_search_button">search</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Intro -->
+
+	<div class="intro">
+		
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<!-- Destinations -->
+
+	<div class="destinations" id="destinations">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					
+					<div class="section_title"><h2>Used Vehicles</h2></div>
+					<div class="section_subtitle">For Sale Near You</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	
 
 
+	<!-- Footer -->
 
+	<footer class="footer">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src=" {% static 'images/usedcars.jpg' %} " data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row footer_contact_row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src=" {% static 'images/sign.svg' %} " alt=""></div>
+								<div class="footer_contact_title">give us a call</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>Office Landline: +44 5567 32 664 567</li>
+										<li>Mobile: +44 5567 89 3322 332</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src=" {% static 'images/trekking.svg' %} " alt=""></div>
+								<div class="footer_contact_title">come & drop by</div>
+								<div class="footer_contact_list">
+									<ul style="max-width:190px">
+										<li>4124 Barnes Street, Sanford, FL 32771</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src=" {% static 'images/around.svg' %} " alt=""></div>
+								<div class="footer_contact_title">send us a message</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>youremail@gmail.com</li>
+										<li>Office@yourbusinessname.com</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col text-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>
+	</footer>
+</div>
+
+<script src=" {% static 'js/jquery-3.2.1.min.js' %} "></script>
+<script src=" {% static 'styles/bootstrap4/popper.js' %} "></script>
+<script src=" {% static 'styles/bootstrap4/bootstrap.min.js' %} "></script>
+<script src=" {% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %} "></script>
+<script src=" {% static 'plugins/Isotope/isotope.pkgd.min.js' %} "></script>
+<script src=" {% static 'plugins/scrollTo/jquery.scrollTo.min.js' %} "></script>
+<script src=" {% static 'plugins/easing/easing.js' %} "></script>
+<script src=" {% static 'plugins/parallax-js-master/parallax.min.js' %} "></script>
+<script src=" {% static 'js/custom.js' %} "></script>
 </body>
 </html>
